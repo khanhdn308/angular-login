@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { User } from './user';
 import { USER } from './mock-user';
 
@@ -6,21 +8,17 @@ import { USER } from './mock-user';
   providedIn: 'root'
 })
 export class AuthService {
+  private userUrl = 'api/users';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   public login(user: User) {
-    // if (user.username === 'admin' && user.password === '123') {
-    //   localStorage.setItem('ACCESS_TOKEN', 'access_token');
-    //   return true;
-    // }
-    USER.forEach(usr => {
-      if (usr.username === user.username && usr.password === user.password) {
-        console.log(usr.username + '  ' + usr.password);
-        localStorage.setItem('ACCESS_TOKEN', 'access_token');
+
+    for (const userIterator of USER) {
+      if (userIterator.username === user.username && userIterator.password === user.password) {
         return true;
       }
-    });
+    }
     return false;
   }
 
@@ -30,5 +28,6 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('CURRENT_USER');
   }
 }

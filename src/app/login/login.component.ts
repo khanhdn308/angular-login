@@ -14,7 +14,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted = false;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+    if (authService.isLoggedIn()) {
+      router.navigate(['/main']);
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -32,7 +36,12 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.authService.login(this.loginForm.value)) {
+      localStorage.setItem('ACCESS_TOKEN', 'access_token');
+      localStorage.setItem('CURRENT_USER', this.loginForm.value.username);
+
       this.router.navigateByUrl('/main');
+    } else {
+      alert('Wrong username or password');
     }
   }
 

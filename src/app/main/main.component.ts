@@ -14,6 +14,10 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
+  get user() {
+    return localStorage.getItem('CURRENT_USER');
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('/login');
