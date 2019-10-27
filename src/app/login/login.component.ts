@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupName, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { User } from '../user';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -36,9 +35,9 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.authService.login(this.loginForm.value)) {
+      const loggedUser = this.loginForm.value.username;
       localStorage.setItem('ACCESS_TOKEN', 'access_token');
-      localStorage.setItem('CURRENT_USER', this.loginForm.value.username);
-
+      localStorage.setItem('CURRENT_USER', loggedUser);
       this.router.navigateByUrl('/main');
     } else {
       alert('Wrong username or password');

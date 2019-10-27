@@ -1,0 +1,10 @@
+<dir *ngIf="task">
+    <h2>{{task.name | uppercase}}</h2>
+    <div><span>id: </span>{{task.id}}</div>
+    <div>
+        <label>name:
+            <input [(ngModel)]="task.name" placeholder="task"/>
+        </label>
+    </div>
+    <label>Created by {{task.creator}}</label>
+</dir>

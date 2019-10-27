@@ -9,12 +9,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
+import { TaskComponent } from './task/task.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    TaskComponent,
+    TaskDetailComponent
   ],
   imports: [
     FormsModule,

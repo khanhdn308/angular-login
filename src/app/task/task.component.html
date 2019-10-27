@@ -1,0 +1,17 @@
+<h2>Tasks Dashboard</h2>
+
+<ul class="tasks">
+    <li *ngFor="let task of tasks" (click)="onSelect(task)" [class.selected]="task===selectedTask">
+        <span class="badge">{{task.id}}</span> {{task.name}}
+        <span class="creator">{{task.creator}}</span>
+    </li>
+</ul>
+
+<div>
+    <label>
+        New Task: <input #task />
+    </label>
+    <button (click)="add(task.value)">Add Task</button>
+</div>
+
+<app-task-detail [task]="selectedTask"></app-task-detail>
